@@ -94,6 +94,9 @@ void ObstaclesContainer::Insert(const ::google::protobuf::Message& message) {
         FeatureOutput::WriteFrameEnv();
       }
     }
+    default: {
+      // No data dump
+    }
   }
 
   timestamp_ = timestamp;
@@ -391,7 +394,7 @@ bool ObstaclesContainer::IsPredictable(
   return true;
 }
 
-double ObstaclesContainer::timestamp() {
+double ObstaclesContainer::timestamp() const {
   return timestamp_;
 }
 
