@@ -1,0 +1,32 @@
+https://github.com/ApolloAuto/apollo/blob/master/docs/howto/how_to_debug_dreamview_start_problem.md
+Steps to Start Dreamview
+
+If you encounter problems when starting Dreamview in the docker/scripts/dev sequence, first check if you are using the correct commands as shown below.
+
+$ bash docker/scripts/dev_start.sh
+$ bash docker/scripts/dev_into.sh
+$ bash apollo.sh build
+$ bash scripts/bootstrap.sh
+
+Dreamview Fails to Start
+
+If Dreamview fails to start, use the script below to check the Dreamview startup log and restart Dreamview.
+
+# Start Dreamview in foreground to see any error message it prints out during startup
+$ bash scripts/dreamview.sh start_fe
+
+# check dreamview startup log
+$ cat data/log/dreamview.out
+terminate called after throwing an instance of 'CivetException'
+  what():  null context when constructing CivetServer. Possible problem binding to port.
+
+$ sudo apt-get install psmisc
+
+# to check if dreamview is running from other terminal
+$ sudo lsof -i :8888
+
+# kill other running/pending dreamview
+$ sudo fuser -k 8888/tcp
+
+# restart dreamview again
+$ bash scripts/dreamview.sh
